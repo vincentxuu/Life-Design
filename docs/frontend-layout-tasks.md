@@ -850,7 +850,12 @@ interface BlueprintVersion {
   milestones: {
     id: string;
     title: string;
-    deadline: string;
+    deadline: {
+      type: 'absolute' | 'relative';
+      date?: string;        // ISO 8601 format (YYYY-MM-DD) for 'absolute'
+      value?: number;       // e.g., 6 for 'relative'
+      unit?: 'month' | 'year'; // e.g., 'months' -> 6 months from now
+    };
     completed: boolean;
   }[];
 }
@@ -908,7 +913,12 @@ interface Habit {
   trigger: string; // 觸發時機
   frequency: {
     type: 'daily' | 'weekly' | 'custom';
-    days?: number[]; // 0-6 for weekly
+    daysOfWeek?: number[]; // 0-6, for 'weekly' type
+    customConfig?: {
+      unit: 'day' | 'week' | 'month';
+      interval?: number;  // e.g., every 3 days
+      datesOfMonth?: number[]; // e.g., [1, 15] for 1st and 15th
+    };
   };
   reminderTime?: string; // HH:mm
   streak: number;
@@ -968,7 +978,7 @@ interface MoodTrend {
 ### 12.7 徽章系統資料
 
 ```typescript
-// types/achievement.ts
+// types/badge.ts
 interface Badge {
   id: string;
   name: string;
@@ -984,8 +994,8 @@ interface Badge {
 
 interface UserBadge {
   badgeId: string;
-  unlockedAt: string;
-  progress: number; // 0-100
+  unlockedAt?: string; // Optional: undefined when badge is in progress
+  progress: number;    // 0-100, 100 means unlocked
 }
 
 // 預設徽章清單
@@ -1021,7 +1031,7 @@ apps/web/src/
     ├── values.ts
     ├── habit.ts
     ├── reflection.ts
-    └── achievement.ts
+    └── badge.ts
 ```
 
 ---
