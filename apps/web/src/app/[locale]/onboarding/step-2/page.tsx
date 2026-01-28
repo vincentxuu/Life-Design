@@ -8,12 +8,12 @@ import { GoalCard } from '@/components/onboarding';
 import { ChevronLeft } from 'lucide-react';
 
 interface Goal {
-  id: 'career_change' | 'graduation' | 'midlife' | 'growth';
+  id: 'careerChange' | 'graduation' | 'midlife' | 'growth';
   icon: string;
 }
 
 const goals: Goal[] = [
-  { id: 'career_change', icon: '💼' },
+  { id: 'careerChange', icon: '💼' },
   { id: 'graduation', icon: '🎓' },
   { id: 'midlife', icon: '🔄' },
   { id: 'growth', icon: '🌱' },
@@ -24,6 +24,7 @@ export default function OnboardingStep2() {
   const router = useRouter();
   const locale = params.locale as string;
   const t = useTranslations('onboarding');
+  const tCommon = useTranslations('common');
 
   const [selectedGoal, setSelectedGoal] = React.useState<string | null>(null);
 
@@ -84,7 +85,7 @@ export default function OnboardingStep2() {
           disabled={!selectedGoal}
           className="min-w-[200px]"
         >
-          {t('continue') || '繼續'}
+          {tCommon('continue')}
         </Button>
       </div>
     </div>

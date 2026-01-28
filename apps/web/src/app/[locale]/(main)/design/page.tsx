@@ -4,7 +4,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { Map, Target } from 'lucide-react';
+import { Map, Target, Undo2 } from 'lucide-react';
 import { PageHeader } from '@/components/layout';
 import { Card, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 
@@ -31,6 +31,14 @@ export default function DesignPage() {
       description: '設定並追蹤你的目標與關鍵結果',
       color: 'text-green-500 bg-green-50',
     },
+    {
+      id: 'reverse-goal',
+      icon: Undo2,
+      href: `/${locale}/design/reverse-goal`,
+      title: '逆向工程目標法',
+      description: '從理想終點回推，拆解成可執行步驟',
+      color: 'text-purple-500 bg-purple-50',
+    },
   ];
 
   return (
@@ -40,7 +48,7 @@ export default function DesignPage() {
         description="設計你的理想人生藍圖"
       />
 
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {items.map((item) => {
           const Icon = item.icon;
 

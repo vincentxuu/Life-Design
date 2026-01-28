@@ -4,7 +4,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { Compass, Heart, Star } from 'lucide-react';
+import { Compass, Heart, Star, PieChart } from 'lucide-react';
 import { PageHeader } from '@/components/layout';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 
@@ -60,6 +60,14 @@ export default function ExplorePage() {
       title: '優勢探索',
       description: '發現你的天賦與優勢',
       color: 'text-amber-500 bg-amber-50',
+    },
+    {
+      id: 'life-score',
+      icon: PieChart,
+      href: `/${locale}/explore/life-score`,
+      title: '生活滿意度',
+      description: '評估生活八大面向的滿意度',
+      color: 'text-emerald-500 bg-emerald-50',
     },
   ];
 

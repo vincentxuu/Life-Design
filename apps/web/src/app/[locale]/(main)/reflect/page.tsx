@@ -1,8 +1,11 @@
 'use client';
 
 import * as React from 'react';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { PageHeader } from '@/components/layout';
+import { Calendar } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -12,6 +15,8 @@ import { MOOD_CONFIG, type MoodLevel } from '@/types';
 import { mockReflections, emptyTodayReflection } from '@/mocks';
 
 export default function ReflectPage() {
+  const params = useParams();
+  const locale = params.locale as string;
   const t = useTranslations('reflection');
   const tQuestions = useTranslations('reflection.questions');
 
@@ -50,6 +55,14 @@ export default function ReflectPage() {
       <PageHeader
         title={t('title')}
         description={formattedDate}
+        actions={
+          <Link href={`/${locale}/reflect/weekly-review`}>
+            <Button variant="outline">
+              <Calendar className="mr-2 h-4 w-4" />
+              {t('weeklyReview')}
+            </Button>
+          </Link>
+        }
       />
 
       <div className="space-y-6">

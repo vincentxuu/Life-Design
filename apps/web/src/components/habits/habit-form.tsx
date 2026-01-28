@@ -5,7 +5,8 @@ import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Lightbulb } from 'lucide-react';
+import { Lightbulb, Link2 } from 'lucide-react';
+import { mockHabits } from '@/mocks';
 
 // Trigger IDs that map to i18n keys
 const TRIGGER_IDS = ['morning', 'lunch', 'evening', 'night'] as const;
@@ -28,6 +29,7 @@ interface HabitFormData {
   frequencyType: 'daily' | 'weekly' | 'custom';
   daysOfWeek: number[];
   reminderTime: string;
+  stackedWith?: string; // Habit stacking - link to existing habit
 }
 
 interface HabitFormProps {
@@ -52,7 +54,10 @@ export function HabitForm({
     frequencyType: initialData?.frequencyType || 'daily',
     daysOfWeek: initialData?.daysOfWeek || [0, 1, 2, 3, 4, 5, 6],
     reminderTime: initialData?.reminderTime || '',
+    stackedWith: initialData?.stackedWith || '',
   });
+
+  const [showStacking, setShowStacking] = React.useState(!!initialData?.stackedWith);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -154,6 +159,63 @@ export function HabitForm({
                 {t(`weekdays.${dayId}`)}
               </button>
             ))}
+          </div>
+        )}
+      </div>
+
+      {/* Habit Stacking */}
+      <div className="space-y-3">
+        <button
+          type="button"
+          onClick={() => setShowStacking(!showStacking)}
+          className={cn(
+            'flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed p-3 transition-all',
+            showStacking
+              ? 'border-primary-base bg-primary-pale'
+              : 'border-basic-300 text-basic-500 hover:border-primary-base hover:text-primary-base'
+          )}
+        >
+          <Link2 className="h-4 w-4" />
+          <span className="text-sm font-medium">{t('habitStacking')}</span>
+        </button>
+
+        {showStacking && (
+          <div className="animate-fade-in space-y-3 rounded-xl bg-primary-palest p-4">
+            <p className="text-sm text-basic-500">{t('habitStackingTip')}</p>
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-basic-600">{t('stackAfter')}</label>
+              <div className="grid gap-2">
+                {mockHabits.map((habit) => (
+                  <button
+                    key={habit.id}
+                    type="button"
+                    onClick={() =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        stackedWith: prev.stackedWith === habit.id ? '' : habit.id,
+                      }))
+                    }
+                    className={cn(
+                      'flex items-center gap-3 rounded-lg border-2 p-3 text-left transition-all',
+                      formData.stackedWith === habit.id
+                        ? 'border-primary-base bg-white'
+                        : 'border-transparent bg-white/50 hover:bg-white'
+                    )}
+                  >
+                    <span className="text-xl">✓</span>
+                    <span className="text-sm font-medium text-basic-600">{habit.name}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+            {formData.stackedWith && (
+              <div className="rounded-lg bg-success/10 p-3 text-center text-sm text-success">
+                {t('stackedPreview', {
+                  existing: mockHabits.find((h) => h.id === formData.stackedWith)?.name,
+                  new: formData.name || t('newHabit'),
+                })}
+              </div>
+            )}
           </div>
         )}
       </div>
