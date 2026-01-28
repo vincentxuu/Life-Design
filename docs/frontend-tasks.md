@@ -27,9 +27,65 @@
 - [ ] 建立常數定義檔 (顏色、間距、徽章等)
 
 ### 1.3 UI 元件庫 (packages/ui)
-- [ ] 配置 TailwindCSS 4.x
+- [x] 配置 TailwindCSS 4.x
 - [ ] 整合 Radix UI 無障礙元件
-- [ ] 建立設計 Token 系統 (顏色、字型、間距)
+- [x] 建立設計 Token 系統 (顏色、字型、間距)
+
+#### 設計系統參考 (`packages/ui/styles/globals.css`)
+
+**主色 (Primary - 青色系)**
+| Token | Class | 用途 |
+|-------|-------|------|
+| `--primary-palest` | `bg-primary-palest` | 最淡背景 |
+| `--primary-pale` | `bg-primary-pale` | 淡背景 |
+| `--primary-lightest` | `bg-primary-lightest` | 淺背景 |
+| `--primary-lighter` | `bg-primary-lighter` | 較淺 |
+| `--primary-base` | `bg-primary-base` | 主色 |
+| `--primary-darker` | `text-primary-darker` | 深色文字 |
+
+**基礎灰階 (Basic)**
+| Token | Class | 用途 |
+|-------|-------|------|
+| `--basic-100` ~ `--basic-600` | `bg-basic-*` | 灰階背景 |
+| `--basic-white` | `bg-basic-white` | 白色 |
+| `--basic-black` | `text-basic-black` | 黑色文字 |
+
+**語意色彩 (Semantic)**
+| Token | Class | 用途 |
+|-------|-------|------|
+| `--success` | `text-success` | 成功狀態 |
+| `--tips` | `bg-tips` | 提示訊息 |
+| `--destructive` | `text-destructive` | 危險/刪除 |
+| `--alert` | `text-alert` | 警告 |
+
+**品牌色 (Logo)**
+| Token | Class |
+|-------|-------|
+| `--logo-cyan` | `text-logo-cyan` |
+| `--logo-orange` | `text-logo-orange` |
+| `--logo-yellow` | `bg-logo-yellow` |
+
+**文字樣式**
+| Class | 大小 | 粗細 |
+|-------|------|------|
+| `.heading-xl` | 36px | bold |
+| `.heading-lg` | 28px | bold |
+| `.heading-md` | 22px | bold |
+| `.heading-sm` | 18px | bold |
+| `.body-lg` | 18px | normal |
+| `.body-md` | 16px | normal |
+| `.body-sm` | 14px | normal |
+
+**動畫效果**
+| Class | 效果 |
+|-------|------|
+| `.animate-fade-in` | 淡入 |
+| `.animate-slide-y-in` | 垂直滑入 |
+| `.animate-float` | 漂浮 |
+| `.animate-jelly` | 果凍彈跳 |
+| `.animate-stamp` | 蓋印章 |
+| `.animate-marquee` | 跑馬燈 |
+
 - [ ] 建立基礎元件：
   - [ ] Button (Primary, Secondary, Ghost, Destructive)
   - [ ] Input / TextArea
