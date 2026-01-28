@@ -75,7 +75,7 @@ export const mockReflections: Reflection[] = [
 ];
 
 // 心情趨勢數據（用於圖表）
-export const mockMoodTrend: MoodTrend[] = [
+export const mockMoodTrends: MoodTrend[] = [
   { date: '2026-01-22', mood: 4 },
   { date: '2026-01-23', mood: 3 },
   { date: '2026-01-24', mood: 4 },

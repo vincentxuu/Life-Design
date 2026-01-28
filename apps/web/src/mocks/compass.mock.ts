@@ -248,3 +248,20 @@ export const emptyCompassData: Omit<CompassData, 'id' | 'userId' | 'createdAt' |
   profession: { questions: [], keywords: [], score: 0 },
   vocation: { questions: [], keywords: [], score: 0 },
 };
+
+// 問答卡片用的問題格式
+export interface MockCompassQuestion {
+  id: string;
+  dimensionId: 'passion' | 'mission' | 'profession' | 'vocation';
+  question: string;
+  hint: string;
+  placeholder: string;
+}
+
+export const mockCompassQuestions: MockCompassQuestion[] = compassQuestions.map((q) => ({
+  id: q.id,
+  dimensionId: q.dimension,
+  question: q.question,
+  hint: q.hint || '請盡量詳細描述你的想法',
+  placeholder: '在這裡輸入你的想法...',
+}));
