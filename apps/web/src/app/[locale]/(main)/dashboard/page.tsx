@@ -12,6 +12,7 @@ import { mockUser, mockHabits, mockTodayHabitLogs, mockUserBadges, getRecentBadg
 
 export default function DashboardPage() {
   const t = useTranslations('dashboard');
+  const tCommon = useTranslations('common');
   const greeting = getGreeting();
 
   // 計算今日習慣完成數
@@ -66,7 +67,7 @@ export default function DashboardPage() {
             <CardTitle className="flex items-center justify-between">
               <span>{t('quickHabitCheck')}</span>
               <Button variant="ghost" size="sm" rightIcon={<ArrowRight className="h-4 w-4" />}>
-                {t('viewAll', { ns: 'common' })}
+                {tCommon('viewAll')}
               </Button>
             </CardTitle>
           </CardHeader>
@@ -136,7 +137,7 @@ export default function DashboardPage() {
             <CardTitle className="flex items-center justify-between">
               <span>{t('recentBadges')}</span>
               <Button variant="ghost" size="sm" rightIcon={<ArrowRight className="h-4 w-4" />}>
-                查看全部
+                {tCommon('viewAll')}
               </Button>
             </CardTitle>
           </CardHeader>
