@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { Menu, X } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 export interface HeaderProps {
@@ -69,9 +69,9 @@ export function Header({ user, onMenuToggle, isMenuOpen, className }: HeaderProp
             </Avatar>
           </div>
         ) : (
-          <Button variant="primary" size="sm" asChild>
-            <Link href="/login">登入</Link>
-          </Button>
+          <Link href="/login" className={buttonVariants({ variant: 'primary', size: 'sm' })}>
+            登入
+          </Link>
         )}
       </div>
     </header>

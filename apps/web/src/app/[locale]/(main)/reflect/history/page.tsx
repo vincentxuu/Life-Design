@@ -56,7 +56,7 @@ export default function ReflectionHistoryPage() {
       <PageHeader
         title={t('history')}
         description="查看過去的反思記錄與心情變化"
-        action={
+        actions={
           <Button variant="outline" size="sm" onClick={handleBack}>
             <ChevronLeft className="mr-1 h-4 w-4" />
             返回今日

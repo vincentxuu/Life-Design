@@ -52,7 +52,7 @@ export default function CompassResultPage() {
     <div>
       <PageHeader
         title="你的意義羅盤分析結果"
-        action={
+        actions={
           <div className="flex gap-2">
             <Button variant="outline" size="sm" onClick={handleBack}>
               <ChevronLeft className="mr-1 h-4 w-4" />

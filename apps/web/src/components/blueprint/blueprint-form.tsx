@@ -4,8 +4,8 @@ import * as React from 'react';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { ResourceSlider } from './resource-slider';
-import { MilestoneTimeline, type Milestone } from './milestone-timeline';
-import type { BlueprintVersion } from '@/types';
+import { MilestoneTimeline } from './milestone-timeline';
+import type { BlueprintVersion, Milestone } from '@/types';
 
 interface BlueprintFormProps {
   version: BlueprintVersion;

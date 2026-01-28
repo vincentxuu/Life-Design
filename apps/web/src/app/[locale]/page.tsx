@@ -1,10 +1,11 @@
 import { redirect } from 'next/navigation';
 
-export default function HomePage({
-  params: { locale },
+export default async function HomePage({
+  params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
   // 重定向到 dashboard
   redirect(`/${locale}/dashboard`);
 }

@@ -5,17 +5,7 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Plus, X, Check } from 'lucide-react';
-
-export interface Milestone {
-  id: string;
-  title: string;
-  deadline: {
-    type: 'relative';
-    value: number;
-    unit: 'month' | 'year';
-  };
-  completed: boolean;
-}
+import type { Milestone } from '@/types';
 
 interface MilestoneTimelineProps {
   milestones: Milestone[];
@@ -71,8 +61,10 @@ export function MilestoneTimeline({
 
   // Sort milestones by deadline
   const sortedMilestones = [...milestones].sort((a, b) => {
-    const aMonths = a.deadline.unit === 'year' ? a.deadline.value * 12 : a.deadline.value;
-    const bMonths = b.deadline.unit === 'year' ? b.deadline.value * 12 : b.deadline.value;
+    const aValue = a.deadline.value ?? 0;
+    const bValue = b.deadline.value ?? 0;
+    const aMonths = a.deadline.unit === 'year' ? aValue * 12 : aValue;
+    const bMonths = b.deadline.unit === 'year' ? bValue * 12 : bValue;
     return aMonths - bMonths;
   });
 
@@ -88,8 +80,8 @@ export function MilestoneTimeline({
         {sortedMilestones.map((milestone, index) => {
           const deadlineLabel =
             milestone.deadline.unit === 'year'
-              ? `${milestone.deadline.value}年`
-              : `${milestone.deadline.value}個月`;
+              ? `${milestone.deadline.value ?? 0}年`
+              : `${milestone.deadline.value ?? 0}個月`;
 
           return (
             <div

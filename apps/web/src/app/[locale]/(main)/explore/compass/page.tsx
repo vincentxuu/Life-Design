@@ -104,7 +104,7 @@ export default function CompassPage() {
       <PageHeader
         title={t('title')}
         description="探索你的熱愛、使命、專業與職業"
-        action={
+        actions={
           <Button variant="outline" size="sm" onClick={handleSaveProgress}>
             <Save className="mr-2 h-4 w-4" />
             {t('saveProgress')}

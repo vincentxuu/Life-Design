@@ -45,7 +45,7 @@ export default function BlueprintPage() {
       <PageHeader
         title={t('title')}
         description="設計三種不同版本的人生藍圖"
-        action={
+        actions={
           <div className="flex gap-2">
             <Button
               variant="outline"

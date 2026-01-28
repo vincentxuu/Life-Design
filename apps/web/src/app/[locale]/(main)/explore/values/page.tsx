@@ -7,7 +7,7 @@ import { PageHeader } from '@/components/layout';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { ValuesDropZone, ValuesGrid, type ValueItem } from '@/components/values';
-import { DEFAULT_VALUES } from '@/mocks';
+import { DEFAULT_VALUES } from '@/types';
 import { Check } from 'lucide-react';
 
 const MAX_SELECTIONS = 5;

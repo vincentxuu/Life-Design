@@ -11,7 +11,7 @@ import {
   WeeklyTrend,
   StreakBadge,
 } from '@/components/habits';
-import { mockHabits, mockHabitLogs, mockHabitStats } from '@/mocks';
+import { mockHabits, mockTodayHabitLogs, mockHabitStats } from '@/mocks';
 import { ChevronLeft, Edit, Trash2 } from 'lucide-react';
 
 export default function HabitDetailPage() {
@@ -22,7 +22,7 @@ export default function HabitDetailPage() {
 
   // Find the habit
   const habit = mockHabits.find((h) => h.id === habitId);
-  const logs = mockHabitLogs.filter((log) => log.habitId === habitId);
+  const logs = mockTodayHabitLogs.filter((log) => log.habitId === habitId);
   const stats = mockHabitStats.find((s) => s.habitId === habitId);
 
   if (!habit) {
@@ -61,7 +61,7 @@ export default function HabitDetailPage() {
     <div>
       <PageHeader
         title={habit.name}
-        action={
+        actions={
           <div className="flex gap-2">
             <Button variant="outline" size="sm" onClick={handleBack}>
               <ChevronLeft className="mr-1 h-4 w-4" />
