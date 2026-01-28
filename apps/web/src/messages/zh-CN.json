@@ -118,19 +118,47 @@
     "streak": "天",
     "completionTrend": "完成趋势",
     "habitName": "习惯名称",
-    "microHabitTip": "微习惯提示：从小目标开始更容易坚持",
+    "habitNamePlaceholder": "例如：阅读 20 分钟",
+    "microHabitTip": "微习惯提示：从小目标开始更容易坚持。试着用「动词 + 时间/数量」的方式描述。",
     "trigger": "触发时机",
+    "triggers": {
+      "morning": "起床后",
+      "breakfast": "早餐后",
+      "lunch": "午餐后",
+      "dinner": "晚餐后",
+      "evening": "下班后",
+      "night": "睡前",
+      "beforeWork": "工作开始前",
+      "afterWork": "工作结束后",
+      "beforeExercise": "运动前",
+      "afterExercise": "运动后",
+      "custom": "自定"
+    },
     "frequency": "频率",
     "daily": "每天",
     "weekly": "每周特定日",
     "custom": "自定",
+    "weekdays": {
+      "sun": "日",
+      "mon": "一",
+      "tue": "二",
+      "wed": "三",
+      "thu": "四",
+      "fri": "五",
+      "sat": "六"
+    },
     "reminderTime": "提醒时间",
+    "reminderTimeOptional": "提醒时间 (选填)",
     "createHabit": "创建习惯",
-    "weeklyRate": "本周完成率"
+    "weeklyRate": "本周完成率",
+    "longestStreak": "最长连续",
+    "totalHabits": "总习惯数",
+    "items": "项"
   },
   "reflection": {
     "title": "每日反思",
     "howWasToday": "今天过得如何？",
+    "selectMood": "选择心情：{mood}",
     "mood": {
       "great": "很棒",
       "good": "不错",
@@ -144,10 +172,13 @@
       "improve": "明天想要改进什么？"
     },
     "gratitude": "感恩日记",
+    "gratitudeLabel": "感恩",
     "gratitudeOptional": "选填",
     "saveReflection": "保存反思",
     "history": "反思历史",
-    "moodTrend": "心情趋势"
+    "moodTrend": "心情趋势",
+    "meaningfulThing": "最有意义的事",
+    "notFilled": "未填写"
   },
   "settings": {
     "title": "设置",

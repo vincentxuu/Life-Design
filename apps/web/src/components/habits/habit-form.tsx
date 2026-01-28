@@ -1,33 +1,26 @@
 'use client';
 
 import * as React from 'react';
+import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Lightbulb } from 'lucide-react';
 
-const TRIGGERS = [
-  { id: 'morning', label: '起床後', icon: '🌅' },
-  { id: 'afternoon', label: '午餐後', icon: '☀️' },
-  { id: 'evening', label: '下班後', icon: '🌆' },
-  { id: 'night', label: '睡前', icon: '🌙' },
-];
+// Trigger IDs that map to i18n keys
+const TRIGGER_IDS = ['morning', 'lunch', 'evening', 'night'] as const;
+const TRIGGER_ICONS: Record<string, string> = {
+  morning: '🌅',
+  lunch: '☀️',
+  evening: '🌆',
+  night: '🌙',
+};
 
-const FREQUENCIES = [
-  { id: 'daily', label: '每天' },
-  { id: 'weekly', label: '每週特定日' },
-  { id: 'custom', label: '自訂' },
-];
+// Frequency IDs
+const FREQUENCY_IDS = ['daily', 'weekly', 'custom'] as const;
 
-const WEEKDAYS = [
-  { id: 0, label: '日' },
-  { id: 1, label: '一' },
-  { id: 2, label: '二' },
-  { id: 3, label: '三' },
-  { id: 4, label: '四' },
-  { id: 5, label: '五' },
-  { id: 6, label: '六' },
-];
+// Weekday IDs
+const WEEKDAY_IDS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'] as const;
 
 interface HabitFormData {
   name: string;
@@ -48,11 +41,14 @@ export function HabitForm({
   initialData,
   onSubmit,
   onCancel,
-  submitLabel = '建立習慣',
+  submitLabel,
 }: HabitFormProps) {
+  const t = useTranslations('habits');
+  const tCommon = useTranslations('common');
+
   const [formData, setFormData] = React.useState<HabitFormData>({
     name: initialData?.name || '',
-    trigger: initialData?.trigger || TRIGGERS[0].label,
+    trigger: initialData?.trigger || 'morning',
     frequencyType: initialData?.frequencyType || 'daily',
     daysOfWeek: initialData?.daysOfWeek || [0, 1, 2, 3, 4, 5, 6],
     reminderTime: initialData?.reminderTime || '',
@@ -76,40 +72,37 @@ export function HabitForm({
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Habit Name */}
       <div className="space-y-2">
-        <label className="text-sm font-medium text-basic-600">習慣名稱</label>
+        <label className="text-sm font-medium text-basic-600">{t('habitName')}</label>
         <Input
           value={formData.name}
           onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
-          placeholder="例如：閱讀 20 分鐘"
+          placeholder={t('habitNamePlaceholder')}
           required
         />
         <div className="flex items-start gap-2 rounded-lg bg-tips/10 p-3">
           <Lightbulb className="mt-0.5 h-4 w-4 flex-shrink-0 text-tips" />
-          <p className="text-sm text-basic-500">
-            微習慣提示：從小目標開始更容易堅持。
-            試著用「動詞 + 時間/數量」的方式描述。
-          </p>
+          <p className="text-sm text-basic-500">{t('microHabitTip')}</p>
         </div>
       </div>
 
       {/* Trigger */}
       <div className="space-y-2">
-        <label className="text-sm font-medium text-basic-600">觸發時機</label>
+        <label className="text-sm font-medium text-basic-600">{t('trigger')}</label>
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-          {TRIGGERS.map((trigger) => (
+          {TRIGGER_IDS.map((triggerId) => (
             <button
-              key={trigger.id}
+              key={triggerId}
               type="button"
-              onClick={() => setFormData((prev) => ({ ...prev, trigger: trigger.label }))}
+              onClick={() => setFormData((prev) => ({ ...prev, trigger: triggerId }))}
               className={cn(
                 'flex flex-col items-center gap-1 rounded-xl border-2 p-3 transition-all',
-                formData.trigger === trigger.label
+                formData.trigger === triggerId
                   ? 'border-primary-base bg-primary-pale'
                   : 'border-basic-200 hover:border-primary-base/50'
               )}
             >
-              <span className="text-xl">{trigger.icon}</span>
-              <span className="text-sm font-medium">{trigger.label}</span>
+              <span className="text-xl">{TRIGGER_ICONS[triggerId]}</span>
+              <span className="text-sm font-medium">{t(`triggers.${triggerId}`)}</span>
             </button>
           ))}
         </div>
@@ -117,28 +110,28 @@ export function HabitForm({
 
       {/* Frequency */}
       <div className="space-y-3">
-        <label className="text-sm font-medium text-basic-600">頻率</label>
+        <label className="text-sm font-medium text-basic-600">{t('frequency')}</label>
         <div className="flex gap-2">
-          {FREQUENCIES.map((freq) => (
+          {FREQUENCY_IDS.map((freqId) => (
             <button
-              key={freq.id}
+              key={freqId}
               type="button"
               onClick={() =>
                 setFormData((prev) => ({
                   ...prev,
-                  frequencyType: freq.id as HabitFormData['frequencyType'],
+                  frequencyType: freqId as HabitFormData['frequencyType'],
                   daysOfWeek:
-                    freq.id === 'daily' ? [0, 1, 2, 3, 4, 5, 6] : prev.daysOfWeek,
+                    freqId === 'daily' ? [0, 1, 2, 3, 4, 5, 6] : prev.daysOfWeek,
                 }))
               }
               className={cn(
                 'rounded-full px-4 py-2 text-sm font-medium transition-all',
-                formData.frequencyType === freq.id
+                formData.frequencyType === freqId
                   ? 'bg-primary-base text-white'
                   : 'bg-basic-100 text-basic-500 hover:bg-basic-200'
               )}
             >
-              {freq.label}
+              {t(freqId)}
             </button>
           ))}
         </div>
@@ -146,19 +139,19 @@ export function HabitForm({
         {/* Days of Week Selector */}
         {formData.frequencyType === 'weekly' && (
           <div className="flex justify-center gap-2">
-            {WEEKDAYS.map((day) => (
+            {WEEKDAY_IDS.map((dayId, index) => (
               <button
-                key={day.id}
+                key={dayId}
                 type="button"
-                onClick={() => toggleDayOfWeek(day.id)}
+                onClick={() => toggleDayOfWeek(index)}
                 className={cn(
                   'flex h-10 w-10 items-center justify-center rounded-full text-sm font-medium transition-all',
-                  formData.daysOfWeek.includes(day.id)
+                  formData.daysOfWeek.includes(index)
                     ? 'bg-primary-base text-white'
                     : 'bg-basic-100 text-basic-500 hover:bg-basic-200'
                 )}
               >
-                {day.label}
+                {t(`weekdays.${dayId}`)}
               </button>
             ))}
           </div>
@@ -167,7 +160,7 @@ export function HabitForm({
 
       {/* Reminder Time */}
       <div className="space-y-2">
-        <label className="text-sm font-medium text-basic-600">提醒時間 (選填)</label>
+        <label className="text-sm font-medium text-basic-600">{t('reminderTimeOptional')}</label>
         <Input
           type="time"
           value={formData.reminderTime}
@@ -179,11 +172,11 @@ export function HabitForm({
       <div className="flex gap-3">
         {onCancel && (
           <Button type="button" variant="outline" onClick={onCancel} className="flex-1">
-            取消
+            {tCommon('cancel')}
           </Button>
         )}
         <Button type="submit" className="flex-1" disabled={!formData.name.trim()}>
-          {submitLabel}
+          {submitLabel || t('createHabit')}
         </Button>
       </div>
     </form>

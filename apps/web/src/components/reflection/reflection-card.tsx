@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { Card, CardContent } from '@/components/ui/card';
 import type { Reflection } from '@/types';
@@ -17,7 +18,9 @@ export function ReflectionCard({
   onClick,
   compact = false,
 }: ReflectionCardProps) {
+  const t = useTranslations('reflection');
   const moodInfo = getMoodInfo(reflection.mood);
+  const moodLabel = t(`mood.${moodInfo.labelKey}`);
   const date = new Date(reflection.date);
   const formattedDate = date.toLocaleDateString('zh-TW', {
     month: 'short',
@@ -35,7 +38,7 @@ export function ReflectionCard({
         <div className="flex-1">
           <p className="text-sm font-medium text-basic-600">{formattedDate}</p>
           <p className="line-clamp-1 text-xs text-basic-400">
-            {reflection.questions.meaningful || '未填寫'}
+            {reflection.questions.meaningful || t('notFilled')}
           </p>
         </div>
       </button>
@@ -58,7 +61,7 @@ export function ReflectionCard({
             <div>
               <p className="font-semibold text-basic-600">{formattedDate}</p>
               <p className={cn('text-sm', moodInfo.color.split(' ')[2])}>
-                {moodInfo.label}
+                {moodLabel}
               </p>
             </div>
           </div>
@@ -67,7 +70,7 @@ export function ReflectionCard({
         {/* Meaningful */}
         {reflection.questions.meaningful && (
           <div className="mb-3">
-            <p className="text-xs font-medium text-basic-400">最有意義的事</p>
+            <p className="text-xs font-medium text-basic-400">{t('meaningfulThing')}</p>
             <p className="text-sm text-basic-600">{reflection.questions.meaningful}</p>
           </div>
         )}
@@ -75,7 +78,7 @@ export function ReflectionCard({
         {/* Gratitude */}
         {reflection.gratitude.length > 0 && (
           <div className="flex flex-wrap gap-1">
-            <span className="text-xs text-basic-400">感恩：</span>
+            <span className="text-xs text-basic-400">{t('gratitudeLabel')}：</span>
             {reflection.gratitude.map((item, index) => (
               <span
                 key={index}

@@ -47,7 +47,7 @@ export default function HabitsPage() {
       <div className="mb-6 grid grid-cols-2 gap-4 md:grid-cols-4">
         <StatCard
           icon={<Flame className="text-orange-500" />}
-          label="最長連續"
+          label={t('longestStreak')}
           value={longestStreak}
           suffix={` ${t('streak')}`}
         />
@@ -63,7 +63,7 @@ export default function HabitsPage() {
         />
         <StatCard
           icon="🎯"
-          label="總習慣數"
+          label={t('totalHabits')}
           value={habits.length}
         />
       </div>
@@ -72,7 +72,7 @@ export default function HabitsPage() {
       <Card className="mb-6">
         <CardHeader>
           <CardTitle className="flex items-center justify-between">
-            <span>{t('todayHabits')} ({habits.filter((h) => !h.archived).length} 項)</span>
+            <span>{t('todayHabits')} ({habits.filter((h) => !h.archived).length} {t('items')})</span>
             <Button variant="ghost" size="sm">
               {t('completeAll')} ☐
             </Button>

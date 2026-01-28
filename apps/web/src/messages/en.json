@@ -118,19 +118,47 @@
     "streak": "days",
     "completionTrend": "Completion Trend",
     "habitName": "Habit Name",
-    "microHabitTip": "Micro-habit tip: Start small for better consistency",
+    "habitNamePlaceholder": "e.g., Read for 20 minutes",
+    "microHabitTip": "Micro-habit tip: Start small for better consistency. Try describing it as 'verb + time/quantity'.",
     "trigger": "Trigger",
+    "triggers": {
+      "morning": "After waking up",
+      "breakfast": "After breakfast",
+      "lunch": "After lunch",
+      "dinner": "After dinner",
+      "evening": "After work",
+      "night": "Before bed",
+      "beforeWork": "Before work",
+      "afterWork": "After work ends",
+      "beforeExercise": "Before exercise",
+      "afterExercise": "After exercise",
+      "custom": "Custom"
+    },
     "frequency": "Frequency",
     "daily": "Daily",
     "weekly": "Specific days",
     "custom": "Custom",
+    "weekdays": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat"
+    },
     "reminderTime": "Reminder Time",
+    "reminderTimeOptional": "Reminder Time (optional)",
     "createHabit": "Create Habit",
-    "weeklyRate": "Weekly Rate"
+    "weeklyRate": "Weekly Rate",
+    "longestStreak": "Longest Streak",
+    "totalHabits": "Total Habits",
+    "items": "items"
   },
   "reflection": {
     "title": "Daily Reflection",
     "howWasToday": "How was your day?",
+    "selectMood": "Select mood: {mood}",
     "mood": {
       "great": "Great",
       "good": "Good",
@@ -144,10 +172,13 @@
       "improve": "What would you like to improve tomorrow?"
     },
     "gratitude": "Gratitude Journal",
+    "gratitudeLabel": "Gratitude",
     "gratitudeOptional": "Optional",
     "saveReflection": "Save Reflection",
     "history": "Reflection History",
-    "moodTrend": "Mood Trend"
+    "moodTrend": "Mood Trend",
+    "meaningfulThing": "Most Meaningful Thing",
+    "notFilled": "Not filled"
   },
   "settings": {
     "title": "Settings",
