@@ -111,6 +111,11 @@
   id, habit_id, current_streak, longest_streak,
   last_completed_at
   ```
+- [ ] `habit_stacks` - 習慣堆疊連結
+  ```sql
+  id, trigger_habit_id, new_habit_id,
+  stack_type (before/after), created_at
+  ```
 
 ### 2.5 反思日記表
 - [ ] `reflections` - 每日反思
@@ -211,7 +216,20 @@
 - [ ] `PUT /values` - 更新價值觀排序
 - [ ] `GET /values/history` - 價值觀歷史變化
 
-### 4.5 三軌藍圖 API (`/api/v1/blueprints`)
+### 4.5 生活滿意度 API (`/api/v1/satisfaction`)
+- [ ] `GET /satisfaction/areas` - 取得 8 大生活面向定義
+- [ ] `GET /satisfaction` - 取得用戶滿意度評分
+- [ ] `POST /satisfaction` - 提交滿意度評分
+- [ ] `GET /satisfaction/history` - 取得歷史趨勢
+- [ ] `GET /satisfaction/insights` - 取得改善建議
+
+### 4.6 優勢探索 API (`/api/v1/strengths`)
+- [ ] `GET /strengths/questions` - 取得優勢探索問題
+- [ ] `POST /strengths/entries` - 提交優勢探索回答
+- [ ] `GET /strengths/results` - 取得優勢分析結果
+- [ ] `GET /strengths/history` - 取得歷史優勢變化
+
+### 4.7 三軌藍圖 API (`/api/v1/blueprints`)
 - [ ] `GET /blueprints` - 取得所有藍圖
 - [ ] `POST /blueprints` - 創建新藍圖
 - [ ] `GET /blueprints/:id` - 取得單一藍圖
@@ -222,7 +240,19 @@
 - [ ] `PATCH /blueprints/:id/milestones/:mid` - 更新里程碑
 - [ ] `DELETE /blueprints/:id/milestones/:mid` - 刪除里程碑
 
-### 4.6 習慣追蹤 API (`/api/v1/habits`)
+### 4.8 目標與 OKR API (`/api/v1/goals`)
+- [ ] `GET /goals` - 取得所有目標
+- [ ] `POST /goals` - 創建新目標
+- [ ] `GET /goals/:id` - 取得單一目標
+- [ ] `PATCH /goals/:id` - 更新目標
+- [ ] `DELETE /goals/:id` - 刪除目標
+- [ ] `GET /goals/:id/key-results` - 取得關鍵結果
+- [ ] `POST /goals/:id/key-results` - 新增關鍵結果
+- [ ] `PATCH /goals/:id/key-results/:krid` - 更新關鍵結果進度
+- [ ] `DELETE /goals/:id/key-results/:krid` - 刪除關鍵結果
+- [ ] `GET /goals/quarterly-review` - 取得季度回顧資料
+
+### 4.9 習慣追蹤 API (`/api/v1/habits`)
 - [ ] `GET /habits` - 取得所有習慣
 - [ ] `POST /habits` - 創建新習慣
 - [ ] `GET /habits/:id` - 取得單一習慣
@@ -233,8 +263,11 @@
 - [ ] `GET /habits/:id/logs` - 取得打卡記錄
 - [ ] `GET /habits/:id/streak` - 取得連續統計
 - [ ] `GET /habits/stats` - 整體統計資料
+- [ ] `GET /habits/:id/stacks` - 取得習慣堆疊
+- [ ] `POST /habits/:id/stacks` - 創建習慣堆疊連結
+- [ ] `DELETE /habits/:id/stacks/:stackId` - 刪除習慣堆疊連結
 
-### 4.7 反思日記 API (`/api/v1/reflections`)
+### 4.10 反思日記 API (`/api/v1/reflections`)
 - [ ] `GET /reflections` - 取得反思列表
 - [ ] `POST /reflections` - 創建反思
 - [ ] `GET /reflections/:id` - 取得單一反思
@@ -244,13 +277,13 @@
 - [ ] `POST /reflections/weekly` - 創建週回顧
 - [ ] `GET /reflections/moods` - 取得心情記錄
 
-### 4.8 成就系統 API (`/api/v1/badges`)
+### 4.11 成就系統 API (`/api/v1/badges`)
 - [ ] `GET /badges` - 取得所有徽章定義
 - [ ] `GET /badges/mine` - 取得已獲得徽章
 - [ ] `GET /badges/progress` - 取得徽章進度
 - [ ] `POST /badges/check` - 檢查並頒發新徽章
 
-### 4.9 通知 API (`/api/v1/notifications`)
+### 4.12 通知 API (`/api/v1/notifications`)
 - [ ] `POST /notifications/register` - 註冊裝置 Token
 - [ ] `DELETE /notifications/unregister` - 取消註冊
 - [ ] `GET /notifications/preferences` - 取得通知偏好
@@ -387,22 +420,35 @@
 | P1 | 重要功能 | Q2 2026 |
 | P2 | 後續迭代 | Q3 2026+ |
 
-### P0 任務 (MVP)
-- 階段一全部
-- 階段二：2.1-2.4
-- 階段三全部
-- 階段四：4.1-4.7
-- 階段七：7.1-7.3
+### P0 任務 (MVP) - Q1 2026
+- 階段一：專案初始化與基礎架構全部
+- 階段二：2.1-2.4 (用戶、自我探索、目標設定、習慣養成)
+- 階段三：認證系統全部
+- 階段四 API：
+  - 4.1-4.2 認證與用戶 API
+  - 4.3 意義羅盤 API
+  - 4.4 價值觀 API
+  - 4.7 三軌藍圖 API
+  - 4.9 習慣追蹤 API
+  - 4.10 反思日記 API
+- 階段七：7.1-7.3 安全性實作
 
-### P1 任務
-- 階段二：2.5-2.6
-- 階段四：4.8-4.9
-- 階段五全部
-- 階段六全部
-- 階段七：7.4
+### P1 任務 - Q2 2026
+- 階段二：2.5-2.6 (反思日記表、成就系統表)
+- 階段四 API：
+  - 4.5 生活滿意度 API
+  - 4.6 優勢探索 API
+  - 4.8 目標與 OKR API
+  - 4.11 成就系統 API
+  - 4.12 通知 API
+- 階段五：背景任務與排程全部
+- 階段六：推播通知整合全部
+- 階段七：7.4 GDPR 合規
+- 階段九：測試
 
-### P2 任務
-- 階段八、九、十
+### P2 任務 - Q3 2026+
+- 階段八：監控與日誌
+- 階段十：部署與 CI/CD
 
 ---
 
